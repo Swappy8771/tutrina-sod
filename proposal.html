@@ -187,7 +187,7 @@
     /* ── TECH STACK ── */
     .stack-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
     .stack-card {
@@ -213,7 +213,7 @@
     /* ── FEATURE GRID ── */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 20px;
     }
     .feature-card {
@@ -736,9 +736,7 @@
        RESPONSIVE — TABLET LANDSCAPE (≤1024px)
     ════════════════════════════════════════ */
     @media (max-width: 1024px) {
-      .features-grid { grid-template-columns: repeat(2, 1fr); }
       .future-grid   { grid-template-columns: repeat(3, 1fr); }
-      .stack-grid    { grid-template-columns: repeat(3, 1fr); }
       .oos-grid      { grid-template-columns: repeat(3, 1fr); }
     }
 
@@ -762,11 +760,11 @@
 
       /* Grids */
       .stack-grid     { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .features-grid  { grid-template-columns: 1fr; gap: 16px; }
+      .features-grid  { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .forms-grid     { grid-template-columns: 1fr; gap: 20px; }
-      .checklist-grid { grid-template-columns: 1fr; gap: 10px; }
+      .checklist-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .oos-grid       { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .future-grid    { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .future-grid    { grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
       /* Feature cards */
       .feature-card   { padding: 20px; }
@@ -785,11 +783,12 @@
       .phase-num              { margin-bottom: 0; }
       .phase-duration         { font-size: 20px; }
       .phase-right            {
-        padding: 14px 0 24px 20px;
+        padding: 14px 0 28px 20px;
         border-left: 2px solid var(--gray-200);
-        margin-left: 10px;
+        margin-left: 12px;
         border-bottom: none;
       }
+      .phase:last-child .phase-right { border-left-color: transparent; }
       .phase:not(:last-child) .phase-right { border-bottom: none; }
       .phase-title            { font-size: 18px; }
       .phase-subtitle         { font-size: 14px; }
@@ -880,6 +879,7 @@
       .stack-card     { padding: 16px; }
 
       /* Feature cards */
+      .features-grid  { grid-template-columns: 1fr; gap: 12px; }
       .feature-card   { padding: 18px 16px; }
       .feature-num    { width: 32px; height: 32px; font-size: 12px; }
       .feature-card h3 { font-size: 16px; }
@@ -898,9 +898,9 @@
       .phase-right     { padding: 12px 0 20px 16px; }
       .phase-title     { font-size: 17px; }
       .phase-subtitle  { font-size: 13px; margin-bottom: 14px; }
-      .activity        { font-size: 12px; padding: 5px 9px; }
-      .deliverable     { font-size: 12px; padding: 4px 9px; }
-      .dependency-note { font-size: 12px; padding: 9px 12px; }
+      .activity        { font-size: 13px; padding: 6px 10px; }
+      .deliverable     { font-size: 13px; padding: 5px 10px; }
+      .dependency-note { font-size: 13px; padding: 10px 13px; }
 
       /* Timeline table — already card style from 768px breakpoint */
       .timeline-table td:nth-child(1) { font-size: 14px; }
@@ -908,8 +908,8 @@
       .timeline-table td:nth-child(3) { font-size: 12px; }
 
       /* Out of scope */
-      .oos-grid        { grid-template-columns: 1fr; gap: 8px; }
-      .oos-card        { padding: 13px 14px; font-size: 14px; }
+      .oos-grid        { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .oos-card        { padding: 12px 14px; font-size: 14px; }
 
       /* Checklist */
       .checklist-grid  { grid-template-columns: 1fr; }
