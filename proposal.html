@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutrina – Project Proposal</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --accent: #f59e0b;
+      --accent-light: #fffbeb;
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --danger: #ef4444;
+      --danger-light: #fef2f2;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --radius: 12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font);
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
+      color: white;
+      padding: 64px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -80px;
+      width: 320px; height: 320px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -60px;
+      width: 260px; height: 260px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #bfdbfe;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: #fbbf24; }
+    .hero p {
+      font-size: 17px;
+      color: #bfdbfe;
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+    }
+    .hero-meta-item .dot {
+      width: 8px; height: 8px;
+      background: #34d399;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .section {
+      padding: 64px 24px;
+    }
+    .section-alt { background: white; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px; height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .section-title {
+      font-size: clamp(22px, 3.5vw, 32px);
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--gray-500);
+      margin-bottom: 40px;
+    }
+
+    /* ── TECH STACK ── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .stack-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .stack-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .stack-card h4 { font-size: 13px; color: var(--gray-500); font-weight: 600; }
+    .stack-card p { font-size: 15px; font-weight: 700; color: var(--gray-800); }
+
+    /* ── FEATURE GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .feature-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .feature-num {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.3;
+    }
+    .feature-card .purpose {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .tag {
+      background: var(--gray-100);
+      color: var(--gray-600);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .tag.blue { background: var(--primary-light); color: var(--primary); }
+    .tag.green { background: var(--success-light); color: var(--success); }
+
+    /* ── FORMS SECTION ── */
+    .forms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 640px) { .forms-grid { grid-template-columns: 1fr; } }
+
+    .form-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+    }
+    .form-card-head {
+      padding: 20px 24px;
+      font-weight: 700;
+      font-size: 16px;
+      color: white;
+    }
+    .form-card-head.blue { background: var(--primary); }
+    .form-card-head.amber { background: #d97706; }
+    .form-card-head small {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+    .form-card-body { padding: 20px 24px; background: white; }
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 14px;
+      color: var(--gray-700);
+    }
+    .field-row:last-child { border-bottom: none; }
+    .field-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+    .form-destination {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: var(--success-light);
+      border-radius: 8px;
+      font-size: 13px;
+      color: #065f46;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 0; }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0;
+      margin-bottom: 0;
+      position: relative;
+    }
+    @media (max-width: 640px) {
+      .phase { grid-template-columns: 1fr; }
+      .phase-left { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    }
+
+    .phase-left {
+      padding: 32px 32px 32px 0;
+      text-align: right;
+      position: relative;
+    }
+    .phase-left::after {
+      content: '';
+      position: absolute;
+      right: -1px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--gray-200);
+    }
+    .phase-num {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 6px;
+    }
+    .phase-duration {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--gray-900);
+      line-height: 1;
+    }
+    .phase-duration span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-400);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .phase-connector {
+      position: absolute;
+      right: -8px;
+      top: 36px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid var(--primary);
+      z-index: 1;
+    }
+
+    .phase-right {
+      padding: 28px 0 28px 36px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .phase:last-child .phase-right { border-bottom: none; }
+    .phase:last-child .phase-left::after { height: 36px; }
+
+    .phase-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    .phase-subtitle {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-bottom: 16px;
+    }
+
+    .activity-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .activity {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--gray-600);
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
+      padding: 5px 10px;
+    }
+    .activity::before {
+      content: '→';
+      color: var(--primary);
+      font-size: 11px;
+    }
+
+    .deliverables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .deliverable {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #065f46;
+      background: var(--success-light);
+      border-radius: 6px;
+      padding: 4px 10px;
+    }
+    .deliverable::before { content: '✓'; }
+
+    .dependency-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #92400e;
+      margin-bottom: 16px;
+    }
+
+    /* ── TIMELINE SUMMARY ── */
+    .timeline-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+    .timeline-table th {
+      background: var(--gray-800);
+      color: white;
+      text-align: left;
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .timeline-table td {
+      padding: 14px 20px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--gray-100);
+      vertical-align: top;
+    }
+    .timeline-table tr:last-child td { border-bottom: none; background: var(--primary-light); font-weight: 700; }
+    .timeline-table tr:hover td { background: var(--gray-50); }
+    .timeline-table tr:last-child:hover td { background: var(--primary-light); }
+    .dep-badge {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .dep-none {
+      background: var(--success-light);
+      color: #065f46;
+    }
+
+    /* ── OUT OF SCOPE ── */
+    .oos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .oos-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+    .oos-icon {
+      width: 30px; height: 30px;
+      border-radius: 6px;
+      background: var(--gray-100);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .oos-card span { font-size: 11px; color: var(--gray-400); display: block; }
+
+    /* ── CLIENT CHECKLIST ── */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .check-box {
+      width: 22px; height: 22px;
+      border: 2px solid var(--gray-300);
+      border-radius: 5px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .checklist-item h4 { font-size: 14px; font-weight: 700; color: var(--gray-800); }
+    .checklist-item p { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+
+    /* ── FUTURE ── */
+    .future-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .future-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray-500);
+      transition: all 0.2s;
+    }
+    .future-card:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .future-card .future-icon { font-size: 24px; margin-bottom: 8px; }
+    .future-card strong { display: block; color: var(--gray-700); font-size: 13px; font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gray-900);
+      color: var(--gray-400);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 14px;
+    }
+    footer strong { color: white; }
+
+    /* ── UTILITY ── */
+    .divider {
+      height: 1px;
+      background: var(--gray-200);
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .phase { grid-template-columns: 1fr; }
+      .phase-left { text-align: left; padding: 24px 0 0; display: flex; align-items: center; gap: 16px; }
+      .phase-left::after { display: none; }
+      .phase-connector { display: none; }
+      .phase-right { padding: 16px 0 24px; border-left: 2px solid var(--gray-200); margin-left: 8px; padding-left: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Project Proposal · 2026</div>
+  <h1>Tutrina – <span>Coaching Website</span><br>Project Proposal</h1>
+  <p>A professional, responsive tutoring platform built to generate leads, showcase faculty, and support students.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="dot"></span> Next.js Full-Stack</div>
+    <div class="hero-meta-item"><span class="dot"></span> 5–6 Week Timeline</div>
+    <div class="hero-meta-item"><span class="dot"></span> 11 MVP Features</div>
+    <div class="hero-meta-item"><span class="dot"></span> 6 Development Phases</div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-label">Infrastructure</div>
+    <h2 class="section-title">Tech Stack</h2>
+    <p class="section-sub">Technologies powering the platform from frontend to deployment.</p>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-icon">⚡</div>
+        <div>
+          <h4>Frontend</h4>
+          <p>Next.js (React)</p>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon">🔧</div>
+        <div>
+          <h4>Backend / API</h4>
+          <p>Next.js API Routes</p>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon">📊</div>
+        <div>
+          <h4>Form Submissions</h4>
+          <p>Google Sheets + Email</p>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon">📁</div>
+        <div>
+          <h4>Study Materials</h4>
+          <p>Static File Storage</p>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon">🌐</div>
+        <div>
+          <h4>Hosting</h4>
+          <p>Developer-Managed</p>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon">🚀</div>
+        <div>
+          <h4>Deployment</h4>
+          <p>Developer-Owned</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">What We're Building</div>
+    <h2 class="section-title">MVP Features</h2>
+    <p class="section-sub">11 core features included in the first launch. Student portal is excluded and planned for a future phase.</p>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">01</div>
+          <h3>Home Page</h3>
+        </div>
+        <div class="purpose">First impression & lead generation</div>
+        <p style="font-size:13px;color:var(--gray-500);">The primary entry point with all key sections to convert visitors into inquiries.</p>
+        <div class="tag-list">
+          <span class="tag">Hero Banner</span>
+          <span class="tag">About Institute</span>
+          <span class="tag">Courses Overview</span>
+          <span class="tag">Faculty Highlights</span>
+          <span class="tag">Why Choose Us</span>
+          <span class="tag">Testimonials</span>
+          <span class="tag">FAQ</span>
+          <span class="tag">CTA Buttons</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">02</div>
+          <h3>About Us Page</h3>
+        </div>
+        <div class="purpose">Build credibility & trust</div>
+        <p style="font-size:13px;color:var(--gray-500);">Dedicated page introducing the institute to students and parents.</p>
+        <div class="tag-list">
+          <span class="tag">Institute Overview</span>
+          <span class="tag">Vision & Mission</span>
+          <span class="tag">Teaching Methodology</span>
+          <span class="tag">Achievements</span>
+          <span class="tag">Institute Values</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">03</div>
+          <h3>Courses Section</h3>
+        </div>
+        <div class="purpose">Support admissions & inquiries</div>
+        <p style="font-size:13px;color:var(--gray-500);">Data-driven course pages — easy to add or update without code changes.</p>
+        <div class="tag-list">
+          <span class="tag blue">Data-Driven</span>
+          <span class="tag">Course Overview</span>
+          <span class="tag">Subjects Covered</span>
+          <span class="tag">Learning Outcomes</span>
+          <span class="tag">Enrollment Details</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">04</div>
+          <h3>Faculty Section</h3>
+        </div>
+        <div class="purpose">Highlight faculty strengths</div>
+        <p style="font-size:13px;color:var(--gray-500);">Showcase faculty to build confidence in the institute's teaching quality.</p>
+        <div class="tag-list">
+          <span class="tag">Name & Photo</span>
+          <span class="tag">Qualification</span>
+          <span class="tag">Experience</span>
+          <span class="tag">Subject Expertise</span>
+          <span class="tag">Achievements</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">05</div>
+          <h3>Demo Class Booking</h3>
+        </div>
+        <div class="purpose">Increase admissions & lead conversion</div>
+        <p style="font-size:13px;color:var(--gray-500);">Students can request a demo class. Submissions go to Google Sheets and client email.</p>
+        <div class="tag-list">
+          <span class="tag blue">Google Sheets</span>
+          <span class="tag blue">Email Alert</span>
+          <span class="tag">Name</span>
+          <span class="tag">Mobile</span>
+          <span class="tag">Class & Subject</span>
+          <span class="tag">Preferred Timing</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">06</div>
+          <h3>Student Inquiry Form</h3>
+        </div>
+        <div class="purpose">Generate leads & simplify communication</div>
+        <p style="font-size:13px;color:var(--gray-500);">General inquiries collected separately from demo bookings in a dedicated Google Sheet.</p>
+        <div class="tag-list">
+          <span class="tag blue">Google Sheets</span>
+          <span class="tag blue">Email Alert</span>
+          <span class="tag">Name</span>
+          <span class="tag">Mobile</span>
+          <span class="tag">Class & Subject</span>
+          <span class="tag">Message</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">07</div>
+          <h3>Study Materials</h3>
+        </div>
+        <div class="purpose">Improve student learning experience</div>
+        <p style="font-size:13px;color:var(--gray-500);">Publicly accessible PDFs, notes, and worksheets organized by course.</p>
+        <div class="tag-list">
+          <span class="tag green">Public Access</span>
+          <span class="tag">PDF Downloads</span>
+          <span class="tag">Notes</span>
+          <span class="tag">Worksheets</span>
+          <span class="tag">Course-wise</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">08</div>
+          <h3>Testimonials & Success Stories</h3>
+        </div>
+        <div class="purpose">Increase trust & highlight performance</div>
+        <p style="font-size:13px;color:var(--gray-500);">Showcase real feedback from students and parents to drive admissions.</p>
+        <div class="tag-list">
+          <span class="tag">Student Reviews</span>
+          <span class="tag">Parent Feedback</span>
+          <span class="tag">Success Stories</span>
+          <span class="tag">Achievements</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">09</div>
+          <h3>FAQ Section</h3>
+        </div>
+        <div class="purpose">Reduce repetitive inquiries</div>
+        <p style="font-size:13px;color:var(--gray-500);">Answers to common questions reducing support load and improving user experience.</p>
+        <div class="tag-list">
+          <span class="tag">Admissions</span>
+          <span class="tag">Courses</span>
+          <span class="tag">Demo Classes</span>
+          <span class="tag">Study Materials</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">10</div>
+          <h3>Contact Page</h3>
+        </div>
+        <div class="purpose">Encourage inquiries & accessibility</div>
+        <p style="font-size:13px;color:var(--gray-500);">Multiple ways for visitors to reach the institute including a Google Maps embed.</p>
+        <div class="tag-list">
+          <span class="tag">Contact Form</span>
+          <span class="tag">Phone & Email</span>
+          <span class="tag">Google Maps</span>
+          <span class="tag">Location Info</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-num">11</div>
+          <h3>SEO-Friendly Structure</h3>
+        </div>
+        <div class="purpose">Generate organic traffic & online visibility</div>
+        <p style="font-size:13px;color:var(--gray-500);">Pages structured for search engines to improve rankings and drive admissions.</p>
+        <div class="tag-list">
+          <span class="tag">Meta Tags</span>
+          <span class="tag">Course Pages</span>
+          <span class="tag">Class-wise Pages</span>
+          <span class="tag">Subject Pages</span>
+          <span class="tag">Clean URLs</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FORMS DETAIL -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-label">Lead Capture</div>
+    <h2 class="section-title">Form Structure</h2>
+    <p class="section-sub">Two dedicated forms, each feeding into a separate Google Sheet and sending an email alert to the client.</p>
+    <div class="forms-grid">
+      <div class="form-card">
+        <div class="form-card-head blue">
+          Demo Class Booking
+          <small>Sheet: Demo Bookings · Sends email alert</small>
+        </div>
+        <div class="form-card-body">
+          <div class="field-row"><span class="field-dot"></span> Student Name</div>
+          <div class="field-row"><span class="field-dot"></span> Mobile Number</div>
+          <div class="field-row"><span class="field-dot"></span> Email Address</div>
+          <div class="field-row"><span class="field-dot"></span> Class</div>
+          <div class="field-row"><span class="field-dot"></span> Subject</div>
+          <div class="field-row"><span class="field-dot"></span> Preferred Timing</div>
+          <div class="form-destination">✉ Submission → Google Sheet + Client Email</div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-head amber">
+          Student Inquiry
+          <small>Sheet: Inquiries · Sends email alert</small>
+        </div>
+        <div class="form-card-body">
+          <div class="field-row"><span class="field-dot" style="background:#d97706"></span> Name</div>
+          <div class="field-row"><span class="field-dot" style="background:#d97706"></span> Mobile Number</div>
+          <div class="field-row"><span class="field-dot" style="background:#d97706"></span> Email Address</div>
+          <div class="field-row"><span class="field-dot" style="background:#d97706"></span> Class</div>
+          <div class="field-row"><span class="field-dot" style="background:#d97706"></span> Subject</div>
+          <div class="field-row"><span class="field-dot" style="background:#d97706"></span> Message</div>
+          <div class="form-destination">✉ Submission → Google Sheet + Client Email</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIMELINE -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">Development Plan</div>
+    <h2 class="section-title">Project Phases</h2>
+    <p class="section-sub">Six structured phases from planning to live deployment. Total estimated timeline: 5–6 weeks (excluding client delays).</p>
+
+    <div class="timeline">
+
+      <div class="phase">
+        <div class="phase-left">
+          <div class="phase-num">Phase 1</div>
+          <div class="phase-duration">3–5 <span>days</span></div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-title">Discovery & Planning</div>
+          <div class="phase-subtitle">Project foundation, structure, and integrations set up.</div>
+          <div class="activity-list">
+            <div class="activity">Finalize sitemap & page structure</div>
+            <div class="activity">Define course data model</div>
+            <div class="activity">Set up Google Sheets + email integration plan</div>
+            <div class="activity">Initialize Next.js project & repo</div>
+            <div class="activity">Configure deployment pipeline</div>
+          </div>
+          <div class="deliverables">
+            <div class="deliverable">Confirmed sitemap</div>
+            <div class="deliverable">Project repository initialized</div>
+            <div class="deliverable">Google Sheets connected & tested</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-left">
+          <div class="phase-num">Phase 2</div>
+          <div class="phase-duration">5–7 <span>days</span></div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-title">Design</div>
+          <div class="phase-subtitle">UI design for all pages and components.</div>
+          <div class="dependency-note">⚠ Blocked until client provides logo and brand colors.</div>
+          <div class="activity-list">
+            <div class="activity">Homepage design</div>
+            <div class="activity">Internal pages (About, Courses, Faculty, FAQ, Contact)</div>
+            <div class="activity">Mobile responsive layouts</div>
+            <div class="activity">Form & CTA component designs</div>
+          </div>
+          <div class="deliverables">
+            <div class="deliverable">Complete website design</div>
+            <div class="deliverable">Mobile layouts approved</div>
+            <div class="deliverable">Client design sign-off</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-left">
+          <div class="phase-num">Phase 3</div>
+          <div class="phase-duration">10–14 <span>days</span></div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-title">Public Website Development</div>
+          <div class="phase-subtitle">Full build of all public-facing pages and integrations.</div>
+          <div class="activity-list">
+            <div class="activity">Homepage with all sections</div>
+            <div class="activity">About Us page</div>
+            <div class="activity">Courses section (data-driven)</div>
+            <div class="activity">Faculty section</div>
+            <div class="activity">Testimonials section</div>
+            <div class="activity">FAQ section</div>
+            <div class="activity">Contact page + Google Maps</div>
+            <div class="activity">Demo Class Booking form</div>
+            <div class="activity">Student Inquiry form</div>
+            <div class="activity">Study Materials section</div>
+            <div class="activity">SEO structure (meta tags, URLs)</div>
+          </div>
+          <div class="deliverables">
+            <div class="deliverable">Fully functional public website</div>
+            <div class="deliverable">Both forms live with Google Sheets</div>
+            <div class="deliverable">Email notifications working</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-left">
+          <div class="phase-num">Phase 4</div>
+          <div class="phase-duration">3–5 <span>days</span></div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-title">Content Integration</div>
+          <div class="phase-subtitle">Populate the website with real content from the client.</div>
+          <div class="dependency-note">⚠ Blocked until client provides courses, faculty, testimonials, study materials, and images.</div>
+          <div class="activity-list">
+            <div class="activity">Upload course content</div>
+            <div class="activity">Add faculty information & photos</div>
+            <div class="activity">Add testimonials</div>
+            <div class="activity">Organize & upload study materials</div>
+            <div class="activity">Populate all pages with final content</div>
+          </div>
+          <div class="deliverables">
+            <div class="deliverable">Website fully populated with real content</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-left">
+          <div class="phase-num">Phase 5</div>
+          <div class="phase-duration">3–5 <span>days</span></div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-title">Testing & Quality Assurance</div>
+          <div class="phase-subtitle">End-to-end testing before launch.</div>
+          <div class="activity-list">
+            <div class="activity">Functional testing of all pages</div>
+            <div class="activity">Form submission end-to-end testing</div>
+            <div class="activity">Google Sheets & email verification</div>
+            <div class="activity">Mobile device testing (iOS + Android)</div>
+            <div class="activity">Browser compatibility (Chrome, Safari, Firefox, Edge)</div>
+            <div class="activity">Performance & page speed testing</div>
+            <div class="activity">SEO meta tag verification</div>
+          </div>
+          <div class="deliverables">
+            <div class="deliverable">Bug-free tested platform</div>
+            <div class="deliverable">All forms verified end-to-end</div>
+            <div class="deliverable">Cross-device & cross-browser confirmed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-left">
+          <div class="phase-num">Phase 6</div>
+          <div class="phase-duration">2–3 <span>days</span></div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-title">Deployment & Launch</div>
+          <div class="phase-subtitle">Production setup and go-live.</div>
+          <div class="activity-list">
+            <div class="activity">Hosting configuration</div>
+            <div class="activity">Domain & DNS setup</div>
+            <div class="activity">SSL certificate setup</div>
+            <div class="activity">Performance optimization</div>
+            <div class="activity">Final go-live verification</div>
+          </div>
+          <div class="deliverables">
+            <div class="deliverable">Live website on production domain</div>
+            <div class="deliverable">Forms receiving live submissions</div>
+            <div class="deliverable">SSL secured & optimized</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIMELINE TABLE -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-label">At a Glance</div>
+    <h2 class="section-title">Timeline Summary</h2>
+    <p class="section-sub">Estimated durations per phase. Client-dependent phases may extend based on content delivery speed.</p>
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Duration</th>
+          <th>Dependency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Phase 1</strong> – Discovery & Planning</td>
+          <td>3–5 days</td>
+          <td><span class="dep-badge dep-none">None</span></td>
+        </tr>
+        <tr>
+          <td><strong>Phase 2</strong> – Design</td>
+          <td>5–7 days</td>
+          <td><span class="dep-badge">Client: logo + brand colors</span></td>
+        </tr>
+        <tr>
+          <td><strong>Phase 3</strong> – Development</td>
+          <td>10–14 days</td>
+          <td><span class="dep-badge dep-none">Design approval</span></td>
+        </tr>
+        <tr>
+          <td><strong>Phase 4</strong> – Content Integration</td>
+          <td>3–5 days</td>
+          <td><span class="dep-badge">Client: all content & materials</span></td>
+        </tr>
+        <tr>
+          <td><strong>Phase 5</strong> – Testing & QA</td>
+          <td>3–5 days</td>
+          <td><span class="dep-badge dep-none">None</span></td>
+        </tr>
+        <tr>
+          <td><strong>Phase 6</strong> – Deployment</td>
+          <td>2–3 days</td>
+          <td><span class="dep-badge dep-none">None</span></td>
+        </tr>
+        <tr>
+          <td><strong>Total Estimate</strong></td>
+          <td><strong>~5–6 weeks</strong></td>
+          <td>Excludes client delay time</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CLIENT CHECKLIST -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">Action Required</div>
+    <h2 class="section-title">Client Responsibilities</h2>
+    <p class="section-sub">The following items must be provided by the client for the project to stay on schedule.</p>
+    <div class="checklist-grid">
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>
+          <h4>Logo</h4>
+          <p>PNG or SVG, high resolution. Required before Phase 2 begins.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>
+          <h4>Brand Colors</h4>
+          <p>Hex codes or brand guide. Required before Phase 2 begins.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>
+          <h4>Course Details</h4>
+          <p>Name, description, subjects, benefits, class info. Required for Phase 4.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>
+          <h4>Faculty Details</h4>
+          <p>Name, photo, qualification, experience, expertise. Required for Phase 4.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>
+          <h4>Testimonials</h4>
+          <p>Student/parent name, review text, optional photo. Required for Phase 4.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>
+          <h4>Study Materials</h4>
+          <p>PDFs, notes, worksheets organized by course. Required for Phase 4.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>
+          <h4>Institute Information</h4>
+          <p>History, vision, mission, achievements, values. Required for Phase 4.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>
+          <h4>Contact Details</h4>
+          <p>Phone number, email, full address. Required for Phase 3.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>
+          <h4>Email for Notifications</h4>
+          <p>Email address to receive form submission alerts. Required before forms go live.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OUT OF SCOPE -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-label">Not in MVP</div>
+    <h2 class="section-title">Out of Scope</h2>
+    <p class="section-sub">The following features are excluded from the current phase and planned for future development.</p>
+    <div class="oos-grid">
+      <div class="oos-card">
+        <div class="oos-icon">👤</div>
+        <div>Student Portal<span>Future Phase</span></div>
+      </div>
+      <div class="oos-card">
+        <div class="oos-icon">⚙️</div>
+        <div>Admin / CMS Panel<span>Future Phase</span></div>
+      </div>
+      <div class="oos-card">
+        <div class="oos-icon">💳</div>
+        <div>Online Fee Payments<span>Future Phase</span></div>
+      </div>
+      <div class="oos-card">
+        <div class="oos-icon">📝</div>
+        <div>Assignment Management<span>Future Phase</span></div>
+      </div>
+      <div class="oos-card">
+        <div class="oos-icon">📋</div>
+        <div>Online Tests & Quizzes<span>Future Phase</span></div>
+      </div>
+      <div class="oos-card">
+        <div class="oos-icon">👨‍👩‍👧</div>
+        <div>Parent Portal<span>Future Phase</span></div>
+      </div>
+      <div class="oos-card">
+        <div class="oos-icon">📱</div>
+        <div>Mobile Application<span>Future Phase</span></div>
+      </div>
+      <div class="oos-card">
+        <div class="oos-icon">💬</div>
+        <div>WhatsApp Integration<span>Future Phase</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FUTURE -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">What's Next</div>
+    <h2 class="section-title">Future Enhancements</h2>
+    <p class="section-sub">Features that can be built in subsequent phases after the MVP launch.</p>
+    <div class="future-grid">
+      <div class="future-card">
+        <div class="future-icon">🎓</div>
+        <strong>Student Portal</strong>
+        Dashboard, courses, attendance
+      </div>
+      <div class="future-card">
+        <div class="future-icon">⚙️</div>
+        <strong>Admin Panel</strong>
+        Manage content without code
+      </div>
+      <div class="future-card">
+        <div class="future-icon">💳</div>
+        <strong>Fee Payments</strong>
+        Online payment gateway
+      </div>
+      <div class="future-card">
+        <div class="future-icon">📋</div>
+        <strong>Tests & Quizzes</strong>
+        Online assessment system
+      </div>
+      <div class="future-card">
+        <div class="future-icon">🎥</div>
+        <strong>Live Classes</strong>
+        Recorded & live sessions
+      </div>
+      <div class="future-card">
+        <div class="future-icon">📱</div>
+        <strong>Mobile App</strong>
+        iOS & Android application
+      </div>
+      <div class="future-card">
+        <div class="future-icon">💬</div>
+        <strong>WhatsApp</strong>
+        Automated notifications
+      </div>
+      <div class="future-card">
+        <div class="future-icon">🤖</div>
+        <strong>AI Chat Support</strong>
+        Instant query resolution
+      </div>
+      <div class="future-card">
+        <div class="future-icon">📊</div>
+        <strong>Analytics</strong>
+        Advanced reporting & insights
+      </div>
+      <div class="future-card">
+        <div class="future-icon">👨‍👩‍👧</div>
+        <strong>Parent Portal</strong>
+        Track student progress
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Tutrina – Coaching Website</strong><br>
+  Project Proposal · Prepared June 2026 · Built with Next.js
+</footer>
+
+</body>
+</html>
