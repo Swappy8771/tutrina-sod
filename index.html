@@ -213,7 +213,7 @@
     /* ── FEATURE GRID ── */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
     .feature-card {
@@ -257,9 +257,11 @@
       margin-bottom: 10px;
       opacity: 0.8;
     }
-    .feature-card p {
-      font-size: 15px !important;
-      line-height: 1.65 !important;
+    .feature-card p,
+    .card-desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--gray-500);
     }
     .tag-list {
       display: flex;
@@ -630,12 +632,197 @@
       margin: 0 auto;
     }
 
+    /* ════════════════════════════════════════
+       RESPONSIVE — TABLET LANDSCAPE (≤1024px)
+    ════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .future-grid   { grid-template-columns: repeat(3, 1fr); }
+      .stack-grid    { grid-template-columns: repeat(3, 1fr); }
+      .oos-grid      { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE — TABLET PORTRAIT (≤768px)
+    ════════════════════════════════════════ */
     @media (max-width: 768px) {
-      .phase { grid-template-columns: 1fr; }
-      .phase-left { text-align: left; padding: 24px 0 0; display: flex; align-items: center; gap: 16px; }
-      .phase-left::after { display: none; }
-      .phase-connector { display: none; }
-      .phase-right { padding: 16px 0 24px; border-left: 2px solid var(--gray-200); margin-left: 8px; padding-left: 20px; }
+
+      /* Layout */
+      .section        { padding: 48px 20px; }
+      .container      { padding: 0 20px; }
+      .section-sub    { font-size: 16px; margin-bottom: 32px; }
+
+      /* Hero */
+      .hero           { padding: 48px 20px 60px; }
+      .hero h1        { font-size: 28px; letter-spacing: -0.5px; }
+      .hero p         { font-size: 16px; margin-bottom: 28px; }
+      .hero-meta      { gap: 16px; }
+      .hero-meta-item { font-size: 13px; }
+      .hero-logo      { width: 76px; height: 76px; margin-bottom: 20px; }
+
+      /* Grids */
+      .stack-grid     { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .features-grid  { grid-template-columns: 1fr; gap: 16px; }
+      .forms-grid     { grid-template-columns: 1fr; gap: 20px; }
+      .checklist-grid { grid-template-columns: 1fr; gap: 10px; }
+      .oos-grid       { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .future-grid    { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+      /* Feature cards */
+      .feature-card   { padding: 20px; }
+
+      /* Timeline phases — switch to vertical card layout */
+      .phase                  { grid-template-columns: 1fr; }
+      .phase-left             {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-align: left;
+        padding: 20px 0 0;
+      }
+      .phase-left::after      { display: none; }
+      .phase-connector        { display: none; }
+      .phase-num              { margin-bottom: 0; }
+      .phase-duration         { font-size: 20px; }
+      .phase-right            {
+        padding: 14px 0 24px 20px;
+        border-left: 2px solid var(--gray-200);
+        margin-left: 10px;
+        border-bottom: none;
+      }
+      .phase:not(:last-child) .phase-right { border-bottom: none; }
+      .phase-title            { font-size: 18px; }
+      .phase-subtitle         { font-size: 14px; }
+      .activity               { font-size: 13px; padding: 5px 10px; }
+      .deliverable            { font-size: 12px; padding: 5px 10px; }
+
+      /* Timeline summary table — convert to stacked cards */
+      .timeline-table-wrap    { overflow: visible; }
+      .timeline-table         { display: block; border: none; box-shadow: none; background: transparent; }
+      .timeline-table thead   { display: none; }
+      .timeline-table tbody   { display: flex; flex-direction: column; gap: 10px; }
+      .timeline-table tr      {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        background: white;
+        border: 1px solid var(--gray-200);
+        border-radius: 10px;
+        padding: 14px 16px;
+        gap: 4px 12px;
+      }
+      .timeline-table tr:last-child { background: var(--primary-light); border-color: var(--primary-light); }
+      .timeline-table tr:hover td   { background: transparent; }
+      .timeline-table tr:last-child:hover td { background: transparent; }
+      .timeline-table td      {
+        padding: 0;
+        border: none;
+        font-size: 14px;
+        line-height: 1.4;
+        display: block;
+      }
+      /* Phase name — top left, spans full width */
+      .timeline-table td:nth-child(1) {
+        grid-column: 1 / -1;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--gray-900);
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--gray-100);
+        margin-bottom: 4px;
+      }
+      .timeline-table tr:last-child td:nth-child(1) { border-bottom-color: rgba(26,43,74,0.15); }
+      /* Duration — bottom left */
+      .timeline-table td:nth-child(2) {
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 14px;
+      }
+      /* Dependency — bottom right */
+      .timeline-table td:nth-child(3) {
+        text-align: right;
+        font-size: 13px;
+      }
+
+      /* Forms */
+      .form-card-head         { padding: 18px 20px; font-size: 16px; }
+      .form-card-body         { padding: 18px 20px; }
+      .field-row              { font-size: 14px; padding: 10px 0; }
+
+      /* Checklist */
+      .checklist-item         { padding: 14px; }
+      .checklist-item h4      { font-size: 14px; }
+      .checklist-item p       { font-size: 13px; }
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE — MOBILE (≤480px)
+    ════════════════════════════════════════ */
+    @media (max-width: 480px) {
+
+      /* Layout */
+      .section        { padding: 36px 16px; }
+      .container      { padding: 0 16px; }
+      .section-title  { font-size: 22px; }
+      .section-sub    { font-size: 15px; margin-bottom: 28px; }
+
+      /* Hero */
+      .hero           { padding: 40px 16px 52px; }
+      .hero-logo      { width: 68px; height: 68px; border-radius: 16px; margin-bottom: 16px; }
+      .hero h1        { font-size: 24px; letter-spacing: -0.3px; line-height: 1.2; }
+      .hero p         { font-size: 15px; }
+      .hero-badge     { font-size: 11px; padding: 5px 13px; letter-spacing: 1px; }
+      .hero-meta      { gap: 12px; flex-direction: column; align-items: center; }
+      .hero-meta-item { font-size: 13px; }
+
+      /* Stack grid — single column */
+      .stack-grid     { grid-template-columns: 1fr; gap: 10px; }
+      .stack-card     { padding: 16px; }
+
+      /* Feature cards */
+      .feature-card   { padding: 18px 16px; }
+      .feature-num    { width: 32px; height: 32px; font-size: 12px; }
+      .feature-card h3 { font-size: 16px; }
+      .tag            { font-size: 12px; padding: 3px 10px; }
+
+      /* Forms */
+      .form-card-head  { padding: 16px 18px; font-size: 15px; }
+      .form-card-head small { font-size: 12px; }
+      .form-card-body  { padding: 16px 18px; }
+      .field-row       { font-size: 14px; }
+      .form-destination { font-size: 13px; padding: 11px 13px; }
+
+      /* Timeline */
+      .phase-left      { padding-top: 16px; gap: 10px; }
+      .phase-duration  { font-size: 18px; }
+      .phase-right     { padding: 12px 0 20px 16px; }
+      .phase-title     { font-size: 17px; }
+      .phase-subtitle  { font-size: 13px; margin-bottom: 14px; }
+      .activity        { font-size: 12px; padding: 5px 9px; }
+      .deliverable     { font-size: 12px; padding: 4px 9px; }
+      .dependency-note { font-size: 12px; padding: 9px 12px; }
+
+      /* Timeline table — already card style from 768px breakpoint */
+      .timeline-table td:nth-child(1) { font-size: 14px; }
+      .timeline-table td:nth-child(2) { font-size: 13px; }
+      .timeline-table td:nth-child(3) { font-size: 12px; }
+
+      /* Out of scope */
+      .oos-grid        { grid-template-columns: 1fr; gap: 8px; }
+      .oos-card        { padding: 13px 14px; font-size: 14px; }
+
+      /* Checklist */
+      .checklist-grid  { grid-template-columns: 1fr; }
+      .checklist-item  { padding: 13px; }
+
+      /* Future */
+      .future-grid     { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .future-card     { padding: 16px 12px; font-size: 13px; }
+      .future-card .future-icon { font-size: 24px; margin-bottom: 8px; }
+      .future-card strong { font-size: 13px; }
+
+      /* Footer */
+      footer           { padding: 32px 16px; font-size: 14px; }
     }
   </style>
 </head>
@@ -648,11 +835,11 @@
   </div>
   <div class="hero-badge">Project Proposal · 2026</div>
   <h1>Tutrina – <span>Coaching Website</span><br>Project Proposal</h1>
-  <p>A professional, responsive tutoring platform built to generate leads, showcase faculty, and support students.</p>
+  <p>A professional, responsive tutoring platform built to showcase faculty, courses, and institute information.</p>
   <div class="hero-meta">
     <div class="hero-meta-item"><span class="dot"></span> Next.js Full-Stack</div>
     <div class="hero-meta-item"><span class="dot"></span> 5–6 Week Timeline</div>
-    <div class="hero-meta-item"><span class="dot"></span> 11 MVP Features</div>
+    <div class="hero-meta-item"><span class="dot"></span> 10 MVP Features</div>
     <div class="hero-meta-item"><span class="dot"></span> 6 Development Phases</div>
   </div>
 </section>
@@ -717,7 +904,7 @@
   <div class="container">
     <div class="section-label">What We're Building</div>
     <h2 class="section-title">MVP Features</h2>
-    <p class="section-sub">11 core features included in the first launch. Student portal is excluded and planned for a future phase.</p>
+    <p class="section-sub">10 core features included in the first launch. Student portal is excluded and planned for a future phase.</p>
     <div class="features-grid">
 
       <div class="feature-card">
@@ -725,8 +912,8 @@
           <div class="feature-num">01</div>
           <h3>Home Page</h3>
         </div>
-        <div class="purpose">First impression & lead generation</div>
-        <p style="font-size:13px;color:var(--gray-500);">The primary entry point with all key sections to convert visitors into inquiries.</p>
+        <div class="purpose">First impression & student engagement</div>
+        <p class="card-desc">The primary entry point with all key sections to convert visitors into inquiries.</p>
         <div class="tag-list">
           <span class="tag">Hero Banner</span>
           <span class="tag">About Institute</span>
@@ -745,7 +932,7 @@
           <h3>About Us Page</h3>
         </div>
         <div class="purpose">Build credibility & trust</div>
-        <p style="font-size:13px;color:var(--gray-500);">Dedicated page introducing the institute to students and parents.</p>
+        <p class="card-desc">Dedicated page introducing the institute to students and parents.</p>
         <div class="tag-list">
           <span class="tag">Institute Overview</span>
           <span class="tag">Vision & Mission</span>
@@ -761,7 +948,7 @@
           <h3>Courses Section</h3>
         </div>
         <div class="purpose">Support admissions & inquiries</div>
-        <p style="font-size:13px;color:var(--gray-500);">Data-driven course pages — easy to add or update without code changes.</p>
+        <p class="card-desc">Data-driven course pages — easy to add or update without code changes.</p>
         <div class="tag-list">
           <span class="tag blue">Data-Driven</span>
           <span class="tag">Course Overview</span>
@@ -777,7 +964,7 @@
           <h3>Faculty Section</h3>
         </div>
         <div class="purpose">Highlight faculty strengths</div>
-        <p style="font-size:13px;color:var(--gray-500);">Showcase faculty to build confidence in the institute's teaching quality.</p>
+        <p class="card-desc">Showcase faculty to build confidence in the institute's teaching quality.</p>
         <div class="tag-list">
           <span class="tag">Name & Photo</span>
           <span class="tag">Qualification</span>
@@ -790,27 +977,10 @@
       <div class="feature-card">
         <div class="feature-header">
           <div class="feature-num">05</div>
-          <h3>Demo Class Booking</h3>
-        </div>
-        <div class="purpose">Increase admissions & lead conversion</div>
-        <p style="font-size:13px;color:var(--gray-500);">Students can request a demo class. Submissions go to Google Sheets and client email.</p>
-        <div class="tag-list">
-          <span class="tag blue">Google Sheets</span>
-          <span class="tag blue">Email Alert</span>
-          <span class="tag">Name</span>
-          <span class="tag">Mobile</span>
-          <span class="tag">Class & Subject</span>
-          <span class="tag">Preferred Timing</span>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-header">
-          <div class="feature-num">06</div>
           <h3>Student Inquiry Form</h3>
         </div>
-        <div class="purpose">Generate leads & simplify communication</div>
-        <p style="font-size:13px;color:var(--gray-500);">General inquiries collected separately from demo bookings in a dedicated Google Sheet.</p>
+        <div class="purpose">Simplify student communication with the institute</div>
+        <p class="card-desc">Student inquiries collected in a dedicated Google Sheet with an email alert to the client.</p>
         <div class="tag-list">
           <span class="tag blue">Google Sheets</span>
           <span class="tag blue">Email Alert</span>
@@ -823,11 +993,11 @@
 
       <div class="feature-card">
         <div class="feature-header">
-          <div class="feature-num">07</div>
+          <div class="feature-num">06</div>
           <h3>Study Materials</h3>
         </div>
         <div class="purpose">Improve student learning experience</div>
-        <p style="font-size:13px;color:var(--gray-500);">Publicly accessible PDFs, notes, and worksheets organized by course.</p>
+        <p class="card-desc">Publicly accessible PDFs, notes, and worksheets organized by course.</p>
         <div class="tag-list">
           <span class="tag green">Public Access</span>
           <span class="tag">PDF Downloads</span>
@@ -839,11 +1009,11 @@
 
       <div class="feature-card">
         <div class="feature-header">
-          <div class="feature-num">08</div>
+          <div class="feature-num">07</div>
           <h3>Testimonials & Success Stories</h3>
         </div>
         <div class="purpose">Increase trust & highlight performance</div>
-        <p style="font-size:13px;color:var(--gray-500);">Showcase real feedback from students and parents to drive admissions.</p>
+        <p class="card-desc">Showcase real feedback from students and parents to drive admissions.</p>
         <div class="tag-list">
           <span class="tag">Student Reviews</span>
           <span class="tag">Parent Feedback</span>
@@ -854,11 +1024,11 @@
 
       <div class="feature-card">
         <div class="feature-header">
-          <div class="feature-num">09</div>
+          <div class="feature-num">08</div>
           <h3>FAQ Section</h3>
         </div>
         <div class="purpose">Reduce repetitive inquiries</div>
-        <p style="font-size:13px;color:var(--gray-500);">Answers to common questions reducing support load and improving user experience.</p>
+        <p class="card-desc">Answers to common questions reducing support load and improving user experience.</p>
         <div class="tag-list">
           <span class="tag">Admissions</span>
           <span class="tag">Courses</span>
@@ -869,11 +1039,11 @@
 
       <div class="feature-card">
         <div class="feature-header">
-          <div class="feature-num">10</div>
+          <div class="feature-num">09</div>
           <h3>Contact Page</h3>
         </div>
         <div class="purpose">Encourage inquiries & accessibility</div>
-        <p style="font-size:13px;color:var(--gray-500);">Multiple ways for visitors to reach the institute including a Google Maps embed.</p>
+        <p class="card-desc">Multiple ways for visitors to reach the institute including a Google Maps embed.</p>
         <div class="tag-list">
           <span class="tag">Contact Form</span>
           <span class="tag">Phone & Email</span>
@@ -884,11 +1054,11 @@
 
       <div class="feature-card">
         <div class="feature-header">
-          <div class="feature-num">11</div>
-          <h3>SEO-Friendly Structure</h3>
+          <div class="feature-num">10</div>
+          <h3>Well-Structured Page Layout</h3>
         </div>
-        <div class="purpose">Generate organic traffic & online visibility</div>
-        <p style="font-size:13px;color:var(--gray-500);">Pages structured for search engines to improve rankings and drive admissions.</p>
+        <div class="purpose">Clean, organised pages for easy navigation</div>
+        <p class="card-desc">Pages structured with clear URLs, titles, and content organisation for a better user experience.</p>
         <div class="tag-list">
           <span class="tag">Meta Tags</span>
           <span class="tag">Course Pages</span>
@@ -907,37 +1077,22 @@
 <!-- FORMS DETAIL -->
 <section class="section section-alt">
   <div class="container">
-    <div class="section-label">Lead Capture</div>
+    <div class="section-label">Student Communication</div>
     <h2 class="section-title">Form Structure</h2>
-    <p class="section-sub">Two dedicated forms, each feeding into a separate Google Sheet and sending an email alert to the client.</p>
-    <div class="forms-grid">
+    <p class="section-sub">A dedicated inquiry form that feeds into a Google Sheet and sends an email alert to the client on every submission.</p>
+    <div class="forms-grid" style="grid-template-columns: 1fr; max-width: 480px;">
       <div class="form-card">
         <div class="form-card-head blue">
-          Demo Class Booking
-          <small>Sheet: Demo Bookings · Sends email alert</small>
-        </div>
-        <div class="form-card-body">
-          <div class="field-row"><span class="field-dot"></span> Student Name</div>
-          <div class="field-row"><span class="field-dot"></span> Mobile Number</div>
-          <div class="field-row"><span class="field-dot"></span> Email Address</div>
-          <div class="field-row"><span class="field-dot"></span> Class</div>
-          <div class="field-row"><span class="field-dot"></span> Subject</div>
-          <div class="field-row"><span class="field-dot"></span> Preferred Timing</div>
-          <div class="form-destination">✉ Submission → Google Sheet + Client Email</div>
-        </div>
-      </div>
-      <div class="form-card">
-        <div class="form-card-head amber">
           Student Inquiry
           <small>Sheet: Inquiries · Sends email alert</small>
         </div>
         <div class="form-card-body">
-          <div class="field-row"><span class="field-dot" style="background:#b8872a"></span> Name</div>
-          <div class="field-row"><span class="field-dot" style="background:#b8872a"></span> Mobile Number</div>
-          <div class="field-row"><span class="field-dot" style="background:#b8872a"></span> Email Address</div>
-          <div class="field-row"><span class="field-dot" style="background:#b8872a"></span> Class</div>
-          <div class="field-row"><span class="field-dot" style="background:#b8872a"></span> Subject</div>
-          <div class="field-row"><span class="field-dot" style="background:#b8872a"></span> Message</div>
+          <div class="field-row"><span class="field-dot"></span> Name</div>
+          <div class="field-row"><span class="field-dot"></span> Mobile Number</div>
+          <div class="field-row"><span class="field-dot"></span> Email Address</div>
+          <div class="field-row"><span class="field-dot"></span> Class</div>
+          <div class="field-row"><span class="field-dot"></span> Subject</div>
+          <div class="field-row"><span class="field-dot"></span> Message</div>
           <div class="form-destination">✉ Submission → Google Sheet + Client Email</div>
         </div>
       </div>
@@ -1021,10 +1176,9 @@
             <div class="activity">Testimonials section</div>
             <div class="activity">FAQ section</div>
             <div class="activity">Contact page + Google Maps</div>
-            <div class="activity">Demo Class Booking form</div>
             <div class="activity">Student Inquiry form</div>
             <div class="activity">Study Materials section</div>
-            <div class="activity">SEO structure (meta tags, URLs)</div>
+            <div class="activity">Clean page structure (meta tags, URLs)</div>
           </div>
           <div class="deliverables">
             <div class="deliverable">Fully functional public website</div>
@@ -1073,7 +1227,7 @@
             <div class="activity">Mobile device testing (iOS + Android)</div>
             <div class="activity">Browser compatibility (Chrome, Safari, Firefox, Edge)</div>
             <div class="activity">Performance & page speed testing</div>
-            <div class="activity">SEO meta tag verification</div>
+            <div class="activity">Page meta tag & URL verification</div>
           </div>
           <div class="deliverables">
             <div class="deliverable">Bug-free tested platform</div>
@@ -1119,6 +1273,7 @@
     <div class="section-label">At a Glance</div>
     <h2 class="section-title">Timeline Summary</h2>
     <p class="section-sub">Estimated durations per phase. Client-dependent phases may extend based on content delivery speed.</p>
+    <div class="timeline-table-wrap">
     <table class="timeline-table">
       <thead>
         <tr>
@@ -1165,6 +1320,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </section>
 
@@ -1281,10 +1437,6 @@
         <div class="oos-icon">📱</div>
         <div>Mobile Application<span>Future Phase</span></div>
       </div>
-      <div class="oos-card">
-        <div class="oos-icon">💬</div>
-        <div>WhatsApp Integration<span>Future Phase</span></div>
-      </div>
     </div>
   </div>
 </section>
@@ -1327,11 +1479,6 @@
         <div class="future-icon">📱</div>
         <strong>Mobile App</strong>
         iOS & Android application
-      </div>
-      <div class="future-card">
-        <div class="future-icon">💬</div>
-        <strong>WhatsApp</strong>
-        Automated notifications
       </div>
       <div class="future-card">
         <div class="future-icon">🤖</div>
